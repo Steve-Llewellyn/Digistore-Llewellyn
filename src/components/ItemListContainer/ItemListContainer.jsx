@@ -1,39 +1,87 @@
-import React from 'react'
-import getProducts from '../../data/data.js'
-import { useState, useEffect } from 'react'
-import ItemList from './ItemList';
-import { useParams } from 'react-router-dom';
+import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
+import ItemList from "./ItemList";
+import NotFound from "../Pages/NotFound"; 
+import NoProducts from "../Pages/NoProducts"; 
+import "./itemListContainer.css";
+import { GridLoader } from "react-spinners";
+import { getDocs, collection, query, where } from "firebase/firestore";
+import db from "../../db/db.js";
 
-//el .then() permite manejar el resultado de una Promise y encadenar acciones a realizar una vez que la Promise se resuelva.
+const ItemListContainer = ({ greetings }) => {
+  const [productos, setProductos] = useState([]);
+  const [isLoading, setIsLoading] = useState(true); 
+  const [error, setError] = useState(false);
+  const { idCategory } = useParams();
 
+  const getProducts = async () => {
+    try {
+      const refProducts = collection(db, "products");
+      const dataDb = await getDocs(refProducts);
 
-const ItemListContainer = ({greetings}) => {
-  const [productos, setProductos] = useState([])
-  const {idCategory}= useParams();
+      const data = dataDb.docs.map((productDb) => {
+        return { id: productDb.id, ...productDb.data() };
+      });
 
-  useEffect(()=> {
-    getProducts()
-    .then((respuesta)=> {
-      if(idCategory){
-        const productosFiltrados = respuesta.filter( (producto)=>producto.category === idCategory)
-        setProductos(productosFiltrados)      }
-      else {
-      setProductos(respuesta);
-      }
-    })
-    .catch((error)=> {
-      console.error(error);
-    })
-    .finally(()=> {
-      console.log("Finalizo la promesa");
-    });
+      setProductos(data);
+      setError(false);
+    } catch (error) {
+      console.error("Error fetching products:", error);
+      setError(true);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
-  }, [idCategory])
+  const getProductsByCategory = async () => {
+    try {
+      const refProducts = collection(db, "products");
+      const q = query(refProducts, where("category", "==", idCategory));
+      const dataDb = await getDocs(q);
 
-      return (
+      const data = dataDb.docs.map((productDb) => {
+        return { id: productDb.id, ...productDb.data() };
+      });
+
+      setProductos(data);
+      setError(false);
+    } catch (error) {
+      console.error("Error fetching products by category:", error);
+      setError(true);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    if (idCategory) {
+      getProductsByCategory();
+    } else {
+      getProducts();
+    }
+  }, [idCategory]);
+
+  if (isLoading) {
+    return (
+      <div>
+        <GridLoader color="orange" />
+      </div>
+    );
+  }
+
+  if (error) {
+    return <NotFound />; 
+  }
+
+  if (productos.length === 0) {
+    return <NoProducts />;
+
+  }
+
+  return (
     <div>
-        <p>{greetings}</p>
-        <ItemList productos={productos} />
+      <p>{greetings}</p>
+      <ItemList productos={productos} />
     </div>
   );
 };

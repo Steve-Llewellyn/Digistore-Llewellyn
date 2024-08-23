@@ -1,0 +1,126 @@
+.cartcontent {
+  background-color: black;
+  margin: 50px 20px;
+  border: 2px solid white;
+  border-radius: 10px;
+}
+.cartindividualitem {
+  color: rgb(255, 255, 255);
+  border: none;
+  padding: 15px 32px;
+  display: flex;
+  align-items: center;
+  text-align: left; 
+  list-style: none;
+  max-width: 100%;
+}
+
+.cartimg {
+  width: 150px;
+  margin-right: 20px; 
+}
+
+.carttext {
+  flex: 1; 
+  font-size: 30px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between; 
+  align-items: center;
+}
+.totalprice {
+  font-size: 30px;
+  color: bisque;
+  display: flex;
+  padding: 15px; 
+}
+
+
+.emptyCart {
+  color: rgb(0, 0, 0);
+  font-size: 50px;
+  border: none;
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  text-align: center;
+  color: #ffffff;
+}
+.deletebutton{
+  border: 7px groove;
+  border-color: #1ea3dd;
+  color: rgb(0, 0, 0);
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 25px;
+  border-radius: 24px;
+  transition: ease-out 0.3s;
+  margin: 5px;
+}
+.emptycartbutton{
+  border: 7px groove;
+  border-color: #1ea3dd;
+  color: rgb(0, 0, 0);
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 25px;
+  border-radius: 24px;
+  transition: ease-out 0.3s;
+  margin: 5px;
+}
+.checkoutbutton{
+  border: 7px groove;
+  border-color: #1ea3dd;
+  color: rgb(0, 0, 0);
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 25px;
+  border-radius: 24px;
+  transition: ease-out 0.3s;
+  margin: 5px;
+}
+.gohomebutton{
+  border: groove;
+  border-color: blue;
+  color: rgb(0, 0, 0);
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 25px;
+  border-radius: 24px;
+  transition: ease-out 0.3s;
+  margin: 5px;
+}
+.deletebutton:hover {
+  box-shadow: inset 500px 0 0 0 #dd0909;
+  cursor: pointer;
+  color: black;
+}
+.emptycartbutton:hover {
+  box-shadow: inset 500px 0 0 0 #dd5e09;
+  cursor: pointer;
+  color: black;
+
+}
+.checkoutbutton:hover {
+  box-shadow: inset 500px 0 0 0 #09df3e;
+  cursor: pointer;
+  color: black;
+
+}
+.gohomebutton:hover {
+  box-shadow: inset 500px 0 0 0 #dd5e09;
+  cursor: pointer;
+  color: black;
+  font-size: 18px;
+}

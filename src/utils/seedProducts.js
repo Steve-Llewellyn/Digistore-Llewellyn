@@ -1,4 +1,7 @@
-const productos = [
+import { addDoc, collection } from "firebase/firestore"
+import db from "../db/db.js"
+
+const products= [
     {
       id: "Ex-05",
       name:"Animal Colosseum",
@@ -67,20 +70,16 @@ const productos = [
       stock: 5,
       image: "/img/dragonofcourage-deck.jpg"
     }, 
-      ]
-    
-  const getProducts = () => {
-    return new Promise((resolve,reject)=> {
+]
 
-      // simulacion de un retraso de red
-      setTimeout(() => {
-        resolve(productos)        
-      }, 1000);
-      });
-    };
-      //if(condicion){
-      //}else{
-      //  reject("se rechazo")
-      //}
+const seedProducts = () => {
+    products.map(({id, ...rest})=>{
+        const productsRef = collection (db,"products")
+        addDoc(productsRef,rest)
 
-export default getProducts
+    })
+
+    console.log("Products were uploaded successfully")
+}
+// can improve to put duplicates out. find info
+seedProducts()

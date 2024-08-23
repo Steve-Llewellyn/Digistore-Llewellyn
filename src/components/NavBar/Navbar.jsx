@@ -1,42 +1,35 @@
 import CartWidget from "./CartWidget";
 import "./navbar.css";
-import logo from "../../assets/logo.jpg";
-import {Link} from "react-router-dom"
-
+import logo from "../../assets/logo.png";
+import { Link } from "react-router-dom";
 
 const NavBar = () => {
-    
-    return(
-        <nav className="navbar">
-            <Link to="/" className="brand">
-                <img style= { {width: "150px"}} src={logo} alt=""/>
-                </Link>
+  return (
+    <nav className="navbar">
+      <Link to="/" className="brand">
+        <img src={logo} alt="" />
+      </Link>
 
-            <ul className="categories">
-                
-                <Link to="/category/boosterpacks" className="category">
-                <p>Booster Packs</p>
-                <div className="img-category">
-                </div>
-                </Link>
+      <ul className="categories">
+        <Link to="/category/boosterpacks" className="category">
+          <p>Booster Packs</p>
+          <div className="img-category"></div>
+        </Link>
 
-                <Link to="/category/singles" className="category">
-                <p>Singles</p>
-                <div className="img-category">
-                </div>
-                </Link>
+        <Link to="/category/singles" className="category">
+          <p>Singles</p>
+          <div className="img-category"></div>
+        </Link>
 
-                <Link to="/category/decks" className="category">
-                <p>Premade Decks</p>
-                <div className="img-category">
-                </div>
-                </Link>
-            </ul>
+        <Link to="/category/decks" className="category">
+          <p>Premade Decks</p>
+          <div className="img-category"></div>
+        </Link>
+      </ul>
 
-            <CartWidget />
+      <CartWidget />
+    </nav>
+  );
+};
 
-        </nav>
-    )
-}
-
-export default NavBar
+export default NavBar;

@@ -1,37 +1,42 @@
-import React from 'react'
-import { useState } from 'react'
+import React from "react";
+import { useState } from "react";
+import "./itemCount.css";
 
-//Chekear clase 6 zoom recording
+
 //Breve resumen:
 //Sincrónico: Espera a que una tarea termine antes de comenzar la siguiente.
 
 //Asincrónico: No espera, permite que otras tareas se ejecuten mientras espera que termine una operación.
 
-const ItemCount = ({stock, AddToCart}) => {
-    const [count, setCount]= useState(1)
+const ItemCount = ({ stock, AddToCart }) => {
+  const [count, setCount] = useState(1);
 
-    const aumentar = () => {
-      if (count < stock){
-      setCount (count + 1)
-      }
+  const add = () => {
+    if (count < stock) {
+      setCount(count + 1);
     }
+  };
 
-
-    const disminuir = () => {
-      if (count > 1){setCount(count - 1)
-
+  const substract = () => {
+    if (count > 1) {
+      setCount(count - 1);
     }
-  }
+  };
 
   return (
-    <div>
-      <button onClick={disminuir}>-</button>
-      <p>{count}</p>
-      <button onClick={aumentar}>+</button>
-
-      <button onClick={() => AddToCart (count)}> Add to cart </button>
+    <div className="itemcount">
+      <div className="controls">
+        <button className="substractbutton" onClick={substract}>-</button>
+        <p className="number-display">{count}</p>
+        <button className="addbutton"onClick={add}>+</button>
       </div>
-  )
-}
 
-export default ItemCount
+      <button className="add" onClick={() => AddToCart(count)}>
+        {" "}
+        Add to cart{" "}
+      </button>
+    </div>
+  );
+};
+
+export default ItemCount;
